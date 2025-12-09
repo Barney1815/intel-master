@@ -1,0 +1,44 @@
+{
+  "name": "OSINT",
+  "children": [
+    {
+      "name": "Email",
+      "children": []
+    },
+    {
+      "name": "TikTok",
+      "children": []
+    },
+    {
+      "name": "Username",
+      "children": [
+        {
+          "name": "Content Analysis",
+          "children": []
+        },
+        {
+          "name": "Searches",
+          "children": [
+            {
+              "name": "Search Engine Search",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Websites",
+      "children": [
+        {
+          "name": "Source Code",
+          "children": []
+        },
+        {
+          "name": "WHOIS",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>OSINT Mindmap</title>
+<style>
+body {
+    font-family: 'Monospace', monospace;
+    background: #1e1e1e;
+    color: #c5c8c6;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    color: #8abeb7;
+    margin-bottom: 30px;
+    font-weight: normal;
+}
+#mindmap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+}
+.node {
+    position: relative;
+    background: #282a2e;
+    color: #c5c8c6;
+    padding: 6px 12px 6px 36px; /* Platz für Toggle-Button */
+    border-left: 3px solid #8abeb7;
+    cursor: pointer;
+    margin: 4px 0;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.1s;
+}
+.node:hover {
+    background: #373b41;
+}
+.children {
+    margin-left: 20px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+}
+.node.open > .children {
+    max-height: 1000px;
+}
+.toggle {
+    position: absolute;
+    left: 6px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;       
+    height: 22px;      
+    background: #1e1e1e;
+    border: 2px solid #8abeb7;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 18px; 
+    font-size: 14px;   
+    color: #8abeb7;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, transform 0.1s;
+}
+.toggle:hover {
+    background: #373b41;
+    transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+<h1>OSINT Mindmap</h1>
+<div id="mindmap"></div>
+<script>
+let data = {"name": "OSINT", "children": [{"name": "Email", "children": []}, {"name": "TikTok", "children": []}, {"name": "Username", "children": [{"name": "Content Analysis", "children": []}, {"name": "Searches", "children": [{"name": "Search Engine Search", "children": []}]}]}, {"name": "Websites", "children": [{"name": "Source Code", "children": []}, {"name": "WHOIS", "children": []}]}]};
+
+function renderNode(node) {
+    const div = document.createElement("div");
+    div.className = "node";
+
+    if(node.children && node.children.length > 0) {
+        const toggle = document.createElement("div");
+        toggle.className = "toggle";
+        toggle.textContent = "+";
+        toggle.onclick = (e) => {
+            e.stopPropagation();
+            div.classList.toggle("open");
+            toggle.textContent = div.classList.contains("open") ? "−" : "+";
+        };
+        div.appendChild(toggle);
+    }
+
+    // Textspan rechts neben Button
+    const text = document.createElement("span");
+    text.style.marginLeft = "4px"; // Abstand zwischen Button und Text
+    text.textContent = node.name;
+    div.appendChild(text);
+
+    if(node.children && node.children.length > 0) {
+        const childrenDiv = document.createElement("div");
+        childrenDiv.className = "children";
+        node.children.forEach(child => {
+            childrenDiv.appendChild(renderNode(child));
+        });
+        div.appendChild(childrenDiv);
+    }
+
+    return div;
+}
+
+function refresh() {
+    const container = document.getElementById("mindmap");
+    container.innerHTML = "";
+    container.appendChild(renderNode(data));
+}
+
+refresh();
+</script>
+</body>
+</html>
