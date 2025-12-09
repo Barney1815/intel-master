@@ -22,7 +22,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>OSINT Mindmap</title>
+<title>intel-master</title>
 <style>
 body {
     font-family: 'Monospace', monospace;
@@ -155,7 +155,7 @@ def save_json():
 
 def write_html():
     html_content = HTML_TEMPLATE.replace("{mindmap_json}", json.dumps(mindmap_data, ensure_ascii=False))
-    with open("mindmap.html", "w", encoding="utf-8") as f:
+    with open("intel-master.html", "w", encoding="utf-8") as f:
         f.write(html_content)
     print("HTML-Datei aktualisiert: mindmap.html")
 
@@ -216,7 +216,7 @@ def print_tree(node=None, prefix=""):
 def main():
     write_html()
     print("Interaktiver OSINT Mindmap Editor")
-    print("Mindmap wird in mindmap.html aktualisiert.")
+    print("Mindmap wird in intel-master.html aktualisiert.")
     while True:
         print("\nAktueller Baum:")
         print_tree()
@@ -249,3 +249,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
